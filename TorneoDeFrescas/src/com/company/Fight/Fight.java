@@ -11,14 +11,14 @@ public class Fight { // RECURSO COMPARTIDO
     private Spartan spartan;
     private Semaphore sem;
 
-    private Winners winners;
+    private Champions champions;
 
     public Fight(){
         this.viking = new Viking();
         this.spartan = new Spartan();
         this.sem = new Semaphore(2);//Porque hay dos humanos bebiendo por pelea.
 
-        this.winners = new Winners();
+        this.champions = new Champions();
     }
 
     /**Retorna 1 si gana el vikingo, 2 si gana el spartano*/
@@ -44,17 +44,15 @@ public class Fight { // RECURSO COMPARTIDO
 
         }
 
-        // CONOCER LO QUEDA DE BEBIDA EN EL CUERPO DE CADA UNO, el que se paso de su capacidad, o si ambos se pasaron se su capacidad al mismo tiempo, orinan.
+        // CONOCER LO QUEDA DE BEBIDA EN EL CUERPO DE CADA UNO
         if(viking.getDrinkInBody() > viking.getBladderCapacity()){
-
             viking.setDrinkInBody(viking.getDrinkInBody() - (viking.getDrinkInBody() - viking.getBladderCapacity()));
             viking.urinate();
         }
         else{
-            if(spartan.getDrinkInBody() > spartan.getBladderCapacity()) {
-                spartan.setDrinkInBody(spartan.getDrinkInBody() - (spartan.getDrinkInBody() - spartan.getBladderCapacity()));
-                spartan.urinate();
-            }
+            spartan.setDrinkInBody(spartan.getDrinkInBody() - (spartan.getDrinkInBody() - spartan.getBladderCapacity()));
+
+            spartan.urinate();
         }
 
         //CONOCER EL GANADOR
@@ -84,19 +82,17 @@ public class Fight { // RECURSO COMPARTIDO
         int i;
         i = h.toDrink();
 
-        System.out.println("\n Soy " + h.toString() + " ------> ESTOY BEBIENDO");
-
         this.sem.release();
     }
 
     public void result (Human winner) throws InterruptedException {
-        System.out.println("\n El ganador de la pelea es " + winner.toString());
+        System.out.println("El ganador de la pelea es " + winner.toString());
 
-        this.winners.addWinner(winner);
+        this.champions.addChampion(winner);
     }
 
-    public void showWinners(){
-        System.out.println( this.winners.getWinners() );
+    public void showChampions(){
+        this.champions.showChampions();
     }
 
 }

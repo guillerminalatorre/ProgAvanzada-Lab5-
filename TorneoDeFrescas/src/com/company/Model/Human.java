@@ -108,7 +108,7 @@ public abstract class Human {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
-                ", weight=" + weight + ", drinkInBody="+ drinkInBody +", bladderCapacity=" + bladderCapacity;
+                ", weight=" + weight;
     }
 
 }
